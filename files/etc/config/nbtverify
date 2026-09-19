@@ -1,0 +1,6 @@
+config server
+	option username ''
+	option password ''
+	option enabled '0'
+	option mobile '1'
+	option ping 'http://10.147.103.3/'

@@ -1,12 +1,13 @@
 Package: luci-app-nbtverify
-Version: 1.0
-Depends: +ipset +dnsmasq-full +curl
+Version: 1.0.8-1
+Depends: libc, jshn, luci-base
 Source: https://github.com/nbtca/luci-app-nbtverify
 SourceName: luci-app-nbtverify
-License: GPL-2.0
+License: GPL-2.0-only
 Section: luci
-SourceDateEpoch: 1644683634
+SourceDateEpoch: __SOURCE_DATE_EPOCH__
+URL: https://github.com/nbtca/luci-app-nbtverify
 Maintainer: nbtca <https://github.com/nbtca>
-Architecture: x86_64
-Description:  LuCI Support for nbtverify
-# Installed-Size: 1268
+Architecture: aarch64_cortex-a53
+Installed-Size: __INSTALLED_SIZE__
+Description:  NBTVerify campus network authentication client with LuCI2 web interface. Detects offline campus network via ping URL and authenticates automatically.

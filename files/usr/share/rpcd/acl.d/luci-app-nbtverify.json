@@ -1,0 +1,17 @@
+{
+	"luci-app-nbtverify": {
+		"description": "Grant access to nbtverify configuration and status",
+		"read": {
+			"uci": [ "nbtverify" ],
+			"file": {
+				"/var/run/nbtverify/status.json": [ "read" ]
+			},
+			"ubus": {
+				"service": [ "list" ]
+			}
+		},
+		"write": {
+			"uci": [ "nbtverify" ]
+		}
+	}
+}

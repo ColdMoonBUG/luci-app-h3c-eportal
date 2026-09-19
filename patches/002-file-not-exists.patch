@@ -1,0 +1,16 @@
+--- a/nbtverify/utils/utils.go
++++ b/nbtverify/utils/utils.go
+@@ -94,10 +97,8 @@
+ }
+ func FileNotExists(path string) error {
+ 	_, err := os.Stat(path)
+-	if err != nil {
+-		if os.IsNotExist(err) {
+-			return err
+-		}
++	if os.IsNotExist(err) {
++		return nil
+ 	}
+-	return nil
++	return err
+ }
