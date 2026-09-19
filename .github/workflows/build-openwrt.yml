@@ -46,7 +46,7 @@ jobs:
           cd openwrt-sdk
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cp -a "$GITHUB_WORKSPACE/luci-app-nbtverify" package/luci-app-nbtverify
+          cp -a "$GITHUB_WORKSPACE" package/luci-app-nbtverify
 
       - name: Select package
         run: |
