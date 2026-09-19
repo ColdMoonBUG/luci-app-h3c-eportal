@@ -43,12 +43,25 @@ jobs:
           tar --zstd --extract --file "$SDK_ARCHIVE" \
             --directory openwrt-sdk --strip-components=1
 
-      - name: Prepare feeds and package
+      - name: Update feeds
         run: |
+          set -x
           cd openwrt-sdk
           ./scripts/feeds update -a
+
+      - name: Install feeds
+        run: |
+          set -x
+          cd openwrt-sdk
           ./scripts/feeds install -a
-          cp -a "$GITHUB_WORKSPACE" package/luci-app-nbtverify
+
+      - name: Copy package into SDK tree
+        run: |
+          set -x
+          rm -rf openwrt-sdk/package/luci-app-nbtverify
+          mkdir -p openwrt-sdk/package/luci-app-nbtverify
+          cp -a "$GITHUB_WORKSPACE"/. openwrt-sdk/package/luci-app-nbtverify/
+          ls -la openwrt-sdk/package/luci-app-nbtverify/
 
       - name: Select package
         run: |
