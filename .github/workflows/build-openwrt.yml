@@ -19,6 +19,8 @@ jobs:
   build:
     name: ImmortalWrt 24.10.2 / mediatek-filogic (aarch64_cortex-a53)
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -83,3 +85,25 @@ jobs:
             output/*.ipk
             output/SHA256SUMS
           if-no-files-found: error
+
+      - name: Read version
+        id: ver
+        run: |
+          VER=$(awk '/^Version:/{print $2}' control/control)
+          echo "version=$VER" >> "$GITHUB_OUTPUT"
+          echo "Tagging v$VER"
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.ver.outputs.version }}
+          name: luci-app-nbtverify ${{ steps.ver.outputs.version }}
+          body: |
+            ImmortalWrt 24.10.2 / mediatek filogic (aarch64_cortex-a53) build.
+            H3C eportal (Haijun) auto-login, LuCI2 web UI, procd service.
+          files: |
+            output/*.ipk
+            output/SHA256SUMS
+          overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
